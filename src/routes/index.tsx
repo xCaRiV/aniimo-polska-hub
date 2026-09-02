@@ -1,24 +1,229 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { Globe, X } from "lucide-react";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+import heroBackground from "@/assets/hero-background.jpg";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Aniimo Polska — Polska społeczność Aniimo" },
+      {
+        name: "description",
+        content:
+          "Dołącz do Aniimo Polska — polskiej społeczności graczy Aniimo. Poznaj innych Pathfinderów i wspólnie odkrywaj świat Idyll.",
+      },
+      { name: "theme-color", content: "#7fd7f5" },
+      { property: "og:title", content: "Aniimo Polska" },
+      { property: "og:description", content: "Polska społeczność graczy Aniimo." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Aniimo Polska" },
+      { name: "twitter:description", content: "Polska społeczność graczy Aniimo." },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+const DISCORD_URL = "https://discord.gg/aniimopl";
+const OFFICIAL_URL = "https://www.aniimo.com/";
+
+function DiscordIcon({ className }: { className?: string }) {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M20.317 4.369A19.79 19.79 0 0 0 15.885 3a13.9 13.9 0 0 0-.617 1.27 18.27 18.27 0 0 0-5.535 0A13.6 13.6 0 0 0 9.11 3 19.74 19.74 0 0 0 4.677 4.37C1.87 8.55 1.11 12.623 1.49 16.638a19.9 19.9 0 0 0 6.073 3.07c.49-.669.926-1.38 1.301-2.126a12.9 12.9 0 0 1-2.05-.984c.172-.126.34-.257.502-.392a14.2 14.2 0 0 0 12.087 0c.164.14.332.27.502.392-.653.386-1.34.716-2.053.986.375.744.81 1.455 1.3 2.124a19.85 19.85 0 0 0 6.076-3.07c.446-4.654-.762-8.69-3.191-12.269ZM8.35 14.19c-1.196 0-2.18-1.096-2.18-2.442 0-1.346.96-2.443 2.18-2.443 1.22 0 2.203 1.107 2.18 2.443 0 1.346-.96 2.442-2.18 2.442Zm7.3 0c-1.196 0-2.18-1.096-2.18-2.442 0-1.346.96-2.443 2.18-2.443 1.22 0 2.203 1.107 2.18 2.443 0 1.346-.96 2.442-2.18 2.442Z" />
+    </svg>
+  );
+}
+
+const navLinks = [
+  { label: "Strona główna", href: "/", active: true },
+  { label: "Discord", href: DISCORD_URL, external: true },
+  { label: "Aniimo", href: OFFICIAL_URL, external: true },
+];
+
+function Index() {
+  const [aboutOpen, setAboutOpen] = useState(false);
+
+  return (
+    <main className="relative h-[100dvh] w-screen overflow-hidden text-foreground">
+      {/* BACKGROUND — replace src/assets/hero-background.jpg to change the artwork */}
+      <div
+        className="absolute inset-0 bg-cover bg-center animate-slow-zoom"
+        style={{ backgroundImage: `url(${heroBackground})` }}
+        aria-hidden="true"
       />
-    </div>
+      <div
+        className="absolute inset-0 bg-gradient-to-b from-sky-tint/25 via-transparent to-sky-tint/40"
+        aria-hidden="true"
+      />
+
+      {/* DECORATIVE UI */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        <div className="absolute left-10 top-32 hidden h-24 w-24 rounded-full bg-glow-cyan/40 blur-2xl md:block animate-float-slow" />
+        <div className="absolute right-16 top-1/3 hidden h-20 w-20 rounded-full bg-glow-pink/35 blur-2xl md:block animate-float-slower" />
+        <div className="absolute left-8 top-1/2 hidden flex-col gap-2 md:flex">
+          <span className="block h-px w-16 bg-glow-cyan/70" />
+          <span className="block h-px w-10 bg-glow-cyan/50" />
+          <span className="block h-px w-6 bg-glow-pink/60" />
+        </div>
+        <div className="absolute right-10 bottom-28 hidden grid-cols-4 gap-1.5 md:grid">
+          {Array.from({ length: 16 }).map((_, i) => (
+            <span key={i} className="h-1 w-1 rounded-full bg-glow-cyan/60" />
+          ))}
+        </div>
+        <span className="absolute left-1/4 top-24 hidden text-glow-cyan/70 md:block animate-float-slow">
+          ✕
+        </span>
+        <span className="absolute right-1/3 bottom-40 hidden text-glow-pink/70 md:block animate-float-slower">
+          ✕
+        </span>
+        <div className="absolute inset-x-0 bottom-16 h-px bg-gradient-to-r from-transparent via-glow-cyan/70 to-transparent" />
+      </div>
+
+      {/* HEADER */}
+      <header className="relative z-20 flex items-center justify-between px-5 py-5 md:px-12 md:py-7">
+        {/* LOGO — swap this block for an <img> logo later */}
+        <a href="/" className="flex items-baseline gap-2 leading-none">
+          <span className="font-display text-2xl tracking-wide text-ink drop-shadow-[0_2px_10px_rgba(255,255,255,0.6)] md:text-3xl">
+            ANIIMO
+          </span>
+          <span className="font-display text-sm tracking-[0.35em] text-accent-cyan md:text-base">
+            POLSKA
+          </span>
+        </a>
+
+        <nav className="hidden items-center gap-1 lg:flex">
+          {navLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              {...(link.external ? { target: "_blank", rel: "noreferrer" } : {})}
+              className={`group relative border-r border-white/40 px-6 text-sm font-semibold transition-colors duration-300 last:border-r-0 ${
+                link.active ? "text-accent-cyan" : "text-ink hover:text-accent-cyan"
+              }`}
+            >
+              {link.label}
+              <span
+                className={`absolute -bottom-2 left-1/2 h-0.5 -translate-x-1/2 rounded-full bg-accent-cyan transition-all duration-300 ${
+                  link.active ? "w-5" : "w-0 group-hover:w-5"
+                }`}
+              />
+            </a>
+          ))}
+          <button
+            type="button"
+            onClick={() => setAboutOpen(true)}
+            className="group relative px-6 text-sm font-semibold text-ink transition-colors duration-300 hover:text-accent-cyan"
+          >
+            O grze
+            <span className="absolute -bottom-2 left-1/2 h-0.5 w-0 -translate-x-1/2 rounded-full bg-accent-cyan transition-all duration-300 group-hover:w-5" />
+          </button>
+        </nav>
+
+        <a
+          href={DISCORD_URL}
+          target="_blank"
+          rel="noreferrer"
+          className="rounded-full bg-gradient-cta px-5 py-2.5 text-xs font-bold tracking-wide text-white shadow-glow-cyan transition-all duration-300 hover:-translate-y-0.5 hover:shadow-glow-cyan-strong md:px-7 md:text-sm"
+        >
+          DOŁĄCZ DO NAS
+        </a>
+      </header>
+
+      {/* HERO */}
+      <section className="relative z-10 flex h-[calc(100dvh-140px)] flex-col items-center justify-center px-6 text-center">
+        <p className="mb-5 rounded-full border border-white/60 bg-white/35 px-4 py-1.5 text-[0.7rem] font-semibold tracking-[0.2em] text-ink backdrop-blur-md md:text-xs">
+          🇵🇱 POLSKA SPOŁECZNOŚĆ ANIIMO
+        </p>
+
+        <h1 className="font-display leading-[0.95] tracking-wide">
+          <span className="block bg-gradient-headline bg-clip-text text-transparent drop-shadow-[0_6px_26px_rgba(70,150,205,0.75)] [font-size:clamp(3rem,10vw,8rem)]">
+            ANIIMO
+          </span>
+          <span className="mt-1 block text-ink drop-shadow-[0_4px_18px_rgba(255,255,255,0.7)] [font-size:clamp(1.8rem,5.5vw,4rem)]">
+            POLSKA
+          </span>
+        </h1>
+
+        <p className="mt-4 text-lg font-semibold text-ink drop-shadow-sm md:text-2xl">
+          Razem odkrywamy Idyll.
+        </p>
+        <p className="mt-3 max-w-xl text-sm text-ink-soft md:text-base">
+          Polska społeczność graczy Aniimo. Poznaj innych Pathfinderów, odkrywaj świat Idyll i bądź
+          na bieżąco z najnowszymi informacjami.
+        </p>
+
+        <div className="mt-8 flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row">
+          <a
+            href={DISCORD_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="flex w-full items-center justify-center gap-2.5 rounded-full bg-gradient-cta px-8 py-3.5 text-sm font-bold tracking-wide text-white shadow-glow-cyan transition-all duration-300 hover:-translate-y-0.5 hover:shadow-glow-cyan-strong sm:w-auto md:text-base"
+          >
+            <DiscordIcon className="h-5 w-5" />
+            DOŁĄCZ NA DISCORDA
+          </a>
+          <a
+            href={OFFICIAL_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="flex w-full items-center justify-center gap-2.5 rounded-full border border-white/70 bg-white/30 px-8 py-3.5 text-sm font-semibold text-ink backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/45 sm:w-auto md:text-base"
+          >
+            <Globe className="h-5 w-5 text-accent-cyan" />
+            OFICJALNA STRONA ANIIMO
+          </a>
+        </div>
+
+        <div className="mt-7 flex flex-col items-center gap-1 text-[0.7rem] text-ink-soft md:text-xs">
+          <span className="flex items-center gap-2">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan shadow-glow-cyan" />
+            <strong className="font-semibold text-ink">Aniimo Polska</strong>
+            <span>· Nieoficjalna polska społeczność</span>
+          </span>
+          <span className="tracking-wide">aniimo.pl • discord.gg/aniimopl</span>
+        </div>
+      </section>
+
+      {/* BOTTOM */}
+      <div className="absolute inset-x-0 bottom-4 z-10 text-center text-[0.65rem] text-ink-soft">
+        <p>Aniimo Polska • Nieoficjalna społeczność</p>
+        <p className="opacity-70">Aniimo i powiązane znaki towarowe należą do ich właścicieli.</p>
+      </div>
+
+      {/* O GRZE — popover */}
+      {aboutOpen && (
+        <div
+          className="fixed inset-0 z-30 flex items-center justify-center bg-ink/20 px-6 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-label="O grze Aniimo"
+          onClick={() => setAboutOpen(false)}
+        >
+          <div
+            className="relative max-w-md rounded-3xl border border-white/70 bg-white/70 p-7 text-left shadow-glow-cyan backdrop-blur-xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setAboutOpen(false)}
+              aria-label="Zamknij"
+              className="absolute right-4 top-4 text-ink-soft transition-colors hover:text-accent-cyan"
+            >
+              <X className="h-4 w-4" />
+            </button>
+            <h2 className="font-display text-xl text-ink">O grze</h2>
+            <p className="mt-3 text-sm text-ink-soft">
+              Aniimo to otwartoświatowa gra przygodowa osadzona w krainie Idyll, w której jako
+              Pathfinder poznajesz tajemnicze stworzenia, eksplorujesz rozległe krajobrazy i
+              przeżywasz historie razem z innymi graczami.
+            </p>
+            <p className="mt-3 text-sm text-ink-soft">
+              Aniimo Polska to niezależna, nieoficjalna społeczność polskich graczy.
+            </p>
+          </div>
+        </div>
+      )}
+    </main>
   );
 }
