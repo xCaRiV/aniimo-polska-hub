@@ -90,7 +90,7 @@ export default function AniimoCursor() {
           life: 0,
           ttl: 400 + Math.random() * 300,
           size: 0.8 + Math.random() * 1.8,
-          color: COLORS[Math.floor(Math.random() * COLORS.length)],
+          color: COLORS[Math.floor(Math.random() * COLORS.length)] as string,
           star: Math.random() < 0.15,
         });
       }
@@ -128,6 +128,7 @@ export default function AniimoCursor() {
         ctx.globalCompositeOperation = "lighter";
         for (let i = particles.length - 1; i >= 0; i--) {
           const p = particles[i];
+          if (!p) continue;
           p.life += dt;
           if (p.life >= p.ttl) {
             particles.splice(i, 1);
