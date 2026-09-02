@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Globe, X } from "lucide-react";
 
 import heroBackground from "@/assets/hero-background.jpg";
+import logoAsset from "@/assets/aniimo-polska-logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -25,7 +26,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const DISCORD_URL = "https://discord.gg/aniimopl";
+const DISCORD_URL = "https://discord.gg/CzgRVdhWJR";
 const OFFICIAL_URL = "https://www.aniimo.com/";
 
 function DiscordIcon({ className }: { className?: string }) {
@@ -84,13 +85,12 @@ function Index() {
       {/* HEADER */}
       <header className="relative z-20 flex items-center justify-between px-5 py-5 md:px-12 md:py-7">
         {/* LOGO — swap this block for an <img> logo later */}
-        <a href="/" className="flex items-baseline gap-2 leading-none">
-          <span className="font-display text-2xl tracking-wide text-ink drop-shadow-[0_2px_10px_rgba(255,255,255,0.6)] md:text-3xl">
-            ANIIMO
-          </span>
-          <span className="font-display text-sm tracking-[0.35em] text-accent-cyan md:text-base">
-            POLSKA
-          </span>
+        <a href="/" className="flex items-center leading-none">
+          <img
+            src={logoAsset.url}
+            alt="Aniimo Polska"
+            className="h-9 w-auto md:h-11"
+          />
         </a>
 
         <nav className="hidden items-center gap-1 lg:flex">
@@ -137,13 +137,12 @@ function Index() {
           🇵🇱 POLSKA SPOŁECZNOŚĆ ANIIMO
         </p>
 
-        <h1 className="font-display leading-[0.95] tracking-wide">
-          <span className="block bg-gradient-headline bg-clip-text text-transparent drop-shadow-[0_6px_26px_rgba(70,150,205,0.75)] [font-size:clamp(3rem,10vw,8rem)]">
-            ANIIMO
-          </span>
-          <span className="mt-1 block text-ink drop-shadow-[0_4px_18px_rgba(255,255,255,0.7)] [font-size:clamp(1.8rem,5.5vw,4rem)]">
-            POLSKA
-          </span>
+        <h1 className="w-full">
+          <img
+            src={logoAsset.url}
+            alt="Aniimo Polska"
+            className="mx-auto h-auto w-[min(88vw,520px)] drop-shadow-[0_6px_26px_rgba(70,150,205,0.55)]"
+          />
         </h1>
 
         <p className="mt-4 text-lg font-semibold text-ink drop-shadow-sm md:text-2xl">
@@ -181,7 +180,7 @@ function Index() {
             <strong className="font-semibold text-ink">Aniimo Polska</strong>
             <span>· Nieoficjalna polska społeczność</span>
           </span>
-          <span className="tracking-wide">aniimo.pl • discord.gg/aniimopl</span>
+          <span className="tracking-wide">aniimo.pl • discord.gg/CzgRVdhWJR</span>
         </div>
       </section>
 
