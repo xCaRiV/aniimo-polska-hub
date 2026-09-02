@@ -93,7 +93,7 @@ function Index() {
           />
         </a>
 
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-1 lg:flex">
           {navLinks.map((link) => (
             <a
               key={link.label}
