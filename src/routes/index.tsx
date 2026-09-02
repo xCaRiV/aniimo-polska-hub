@@ -180,7 +180,7 @@ function Index() {
             <strong className="font-semibold text-ink">Aniimo Polska</strong>
             <span>· Nieoficjalna polska społeczność</span>
           </span>
-          <span className="tracking-wide">aniimo.pl • discord.gg/aniimopl</span>
+          <span className="tracking-wide">aniimo.pl • discord.gg/CzgRVdhWJR</span>
         </div>
       </section>
 
