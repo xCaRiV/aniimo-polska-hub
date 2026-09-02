@@ -54,7 +54,7 @@ function Index() {
         aria-hidden="true"
       />
       <div
-        className="absolute inset-0 bg-gradient-to-b from-sky-tint/45 via-transparent to-sky-tint/60"
+        className="absolute inset-0 bg-gradient-to-b from-sky-tint/25 via-transparent to-sky-tint/40"
         aria-hidden="true"
       />
 
@@ -138,7 +138,7 @@ function Index() {
         </p>
 
         <h1 className="font-display leading-[0.95] tracking-wide">
-          <span className="block bg-gradient-headline bg-clip-text text-transparent drop-shadow-[0_6px_28px_rgba(120,220,255,0.55)] [font-size:clamp(3rem,10vw,8rem)]">
+          <span className="block bg-gradient-headline bg-clip-text text-transparent drop-shadow-[0_6px_26px_rgba(70,150,205,0.75)] [font-size:clamp(3rem,10vw,8rem)]">
             ANIIMO
           </span>
           <span className="mt-1 block text-ink drop-shadow-[0_4px_18px_rgba(255,255,255,0.7)] [font-size:clamp(1.8rem,5.5vw,4rem)]">
