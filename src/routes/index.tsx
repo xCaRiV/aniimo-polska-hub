@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Globe, X } from "lucide-react";
 
 import heroBackground from "@/assets/hero-background.jpg";
+import logoAsset from "@/assets/aniimo-polska-logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -25,7 +26,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const DISCORD_URL = "https://discord.gg/aniimopl";
+const DISCORD_URL = "https://discord.gg/CzgRVdhWJR";
 const OFFICIAL_URL = "https://www.aniimo.com/";
 
 function DiscordIcon({ className }: { className?: string }) {
