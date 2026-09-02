@@ -85,13 +85,12 @@ function Index() {
       {/* HEADER */}
       <header className="relative z-20 flex items-center justify-between px-5 py-5 md:px-12 md:py-7">
         {/* LOGO — swap this block for an <img> logo later */}
-        <a href="/" className="flex items-baseline gap-2 leading-none">
-          <span className="font-display text-2xl tracking-wide text-ink drop-shadow-[0_2px_10px_rgba(255,255,255,0.6)] md:text-3xl">
-            ANIIMO
-          </span>
-          <span className="font-display text-sm tracking-[0.35em] text-accent-cyan md:text-base">
-            POLSKA
-          </span>
+        <a href="/" className="flex items-center leading-none">
+          <img
+            src={logoAsset.url}
+            alt="Aniimo Polska"
+            className="h-9 w-auto md:h-11"
+          />
         </a>
 
         <nav className="hidden items-center gap-1 lg:flex">
