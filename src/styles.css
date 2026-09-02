@@ -159,6 +159,16 @@
   }
 }
 
+@media (pointer: fine) {
+  html.aniimo-cursor-active,
+  html.aniimo-cursor-active body,
+  html.aniimo-cursor-active a,
+  html.aniimo-cursor-active button,
+  html.aniimo-cursor-active [role="button"] {
+    cursor: none;
+  }
+}
+
 @utility animate-slow-zoom {
   animation: slow-zoom 30s ease-in-out infinite alternate;
 }
