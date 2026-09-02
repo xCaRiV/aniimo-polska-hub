@@ -137,13 +137,12 @@ function Index() {
           🇵🇱 POLSKA SPOŁECZNOŚĆ ANIIMO
         </p>
 
-        <h1 className="font-display leading-[0.95] tracking-wide">
-          <span className="block bg-gradient-headline bg-clip-text text-transparent drop-shadow-[0_6px_26px_rgba(70,150,205,0.75)] [font-size:clamp(3rem,10vw,8rem)]">
-            ANIIMO
-          </span>
-          <span className="mt-1 block text-ink drop-shadow-[0_4px_18px_rgba(255,255,255,0.7)] [font-size:clamp(1.8rem,5.5vw,4rem)]">
-            POLSKA
-          </span>
+        <h1 className="w-full">
+          <img
+            src={logoAsset.url}
+            alt="Aniimo Polska"
+            className="mx-auto h-auto w-[min(88vw,520px)] drop-shadow-[0_6px_26px_rgba(70,150,205,0.55)]"
+          />
         </h1>
 
         <p className="mt-4 text-lg font-semibold text-ink drop-shadow-sm md:text-2xl">
