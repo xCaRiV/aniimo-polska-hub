@@ -110,7 +110,7 @@ export function DiscordCta({
         vy: dirY * (0.03 + Math.random() * 0.07) - 0.015,
         life: 0,
         maxLife,
-        size: 0.6 + Math.random() * 1.6,
+        size: 0.9 + Math.random() * 1.8,
         color,
         star: Math.random() < 0.15,
         drift: (Math.random() - 0.5) * 0.00012,
@@ -176,7 +176,7 @@ export function DiscordCta({
         p.x += p.vx * dt + Math.sin(p.phase + p.life * 0.004) * 0.05;
         p.y += p.vy * dt;
         const k = p.life / p.maxLife;
-        const alpha = Math.sin(Math.PI * k) * 0.7 * boost;
+        const alpha = Math.sin(Math.PI * k) * 0.95 * boost;
         if (p.star) {
           drawStar(p, alpha);
         } else {
