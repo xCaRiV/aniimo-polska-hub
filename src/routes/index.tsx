@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Globe, X } from "lucide-react";
 
 import heroBackground from "@/assets/hero-background.jpg";
+import { DiscordCta, DiscordGlyph } from "@/components/DiscordCta";
 import logoAsset from "@/assets/aniimo-polska-logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
