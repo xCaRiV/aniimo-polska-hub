@@ -224,3 +224,82 @@
 @utility shadow-glow-cyan-strong {
   box-shadow: 0 16px 40px -8px color-mix(in oklab, var(--glow-cyan) 95%, transparent);
 }
+
+/* ---- "Dołącz na Discorda" CTA: shimmer + breathing glow ---- */
+.discord-cta {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  isolation: isolate;
+  animation: discord-cta-breathe 6.5s ease-in-out infinite;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.discord-cta-shimmer {
+  position: absolute;
+  inset: -40% -60%;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    transparent 38%,
+    rgba(255, 255, 255, 0.05) 45%,
+    rgba(255, 255, 255, 0.38) 50%,
+    rgba(255, 210, 235, 0.18) 55%,
+    transparent 62%
+  );
+  transform: translateX(-120%);
+  animation: discord-cta-sweep 7s ease-in-out infinite;
+}
+
+.discord-cta:hover {
+  transform: translateY(-2px) scale(1.015);
+  animation-duration: 4.2s;
+}
+
+.discord-cta:hover .discord-cta-shimmer {
+  animation-duration: 3.2s;
+  opacity: 1.15;
+}
+
+@keyframes discord-cta-sweep {
+  0%,
+  62% {
+    transform: translateX(-120%);
+  }
+  85%,
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes discord-cta-breathe {
+  0%,
+  100% {
+    box-shadow:
+      0 10px 30px -8px color-mix(in oklab, var(--glow-cyan) 70%, transparent),
+      0 0 0 0 rgba(255, 175, 220, 0);
+  }
+  40% {
+    box-shadow:
+      0 14px 38px -8px color-mix(in oklab, var(--glow-cyan) 95%, transparent),
+      0 0 22px -4px rgba(255, 175, 220, 0.35);
+  }
+  70% {
+    box-shadow:
+      0 12px 32px -8px color-mix(in oklab, var(--glow-cyan) 80%, transparent),
+      0 0 18px -4px rgba(255, 205, 175, 0.28);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .discord-cta,
+  .discord-cta-shimmer {
+    animation: none;
+  }
+  .discord-cta:hover {
+    transform: none;
+  }
+}
