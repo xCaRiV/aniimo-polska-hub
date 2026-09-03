@@ -216,8 +216,9 @@ export function DiscordCta({
       <canvas
         ref={canvasRef}
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0 h-full w-full"
+        className="pointer-events-none absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2"
       />
+
       <a href={href} target="_blank" rel="noreferrer" className={`discord-cta ${className}`}>
         <span className="discord-cta-shimmer" aria-hidden="true" />
         <span className="relative z-10 flex items-center justify-center gap-2.5">{children}</span>
