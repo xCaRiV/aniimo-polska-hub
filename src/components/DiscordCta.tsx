@@ -10,7 +10,10 @@ type Particle = {
   size: number;
   color: string;
   star: boolean;
+  drift: number;
+  phase: number;
 };
+
 
 const COLORS = [
   "rgba(140, 225, 255,", // cyan
