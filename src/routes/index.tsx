@@ -27,7 +27,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const DISCORD_URL = "https://discord.gg/CzgRVdhWJR";
+const DISCORD_URL = "https://discord.gg/aniimopl";
 const OFFICIAL_URL = "https://www.aniimo.com/";
 
 
@@ -172,7 +172,7 @@ function Index() {
             <strong className="font-semibold text-ink">Aniimo Polska</strong>
             <span>· Nieoficjalna polska społeczność</span>
           </span>
-          <span className="tracking-wide">aniimo.pl • discord.gg/CzgRVdhWJR</span>
+          <span className="tracking-wide">aniimo.pl • discord.gg/aniimopl</span>
         </div>
       </section>
 
