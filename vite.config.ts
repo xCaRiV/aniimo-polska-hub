@@ -6,22 +6,10 @@
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
-// `bun run build:static` (STATIC_BUILD=1) emits a fully static site into ./dist
-// that can be uploaded as-is to any plain hosting (e.g. OVH via FileZilla).
-const isStatic = process.env["STATIC_BUILD"] === "1";
-
 export default defineConfig({
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
   },
-  ...(isStatic
-    ? {
-        nitro: {
-          preset: "static",
-          output: { dir: "dist-nitro", publicDir: "dist" },
-        } as const,
-      }
-    : {}),
 });
