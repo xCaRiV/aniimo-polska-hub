@@ -67,12 +67,17 @@ export function DiscordCta({
     if (!ctx) return;
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    let w = 0;
+    const M = 48; // canvas margin around the button so particles are not clipped
+    let w = 0; // canvas width (button + margins)
     let h = 0;
+    let bw = 0; // button width
+    let bh = 0;
     const resize = () => {
       const r = wrap.getBoundingClientRect();
-      w = r.width;
-      h = r.height;
+      bw = r.width;
+      bh = r.height;
+      w = bw + M * 2;
+      h = bh + M * 2;
       canvas.width = Math.max(1, Math.round(w * dpr));
       canvas.height = Math.max(1, Math.round(h * dpr));
       canvas.style.width = `${w}px`;
@@ -84,42 +89,29 @@ export function DiscordCta({
     ro.observe(wrap);
 
     const particles: Particle[] = [];
-    const PAD = 18;
 
     const spawn = () => {
-      const bw = Math.max(0, w - PAD * 2);
-      const bh = Math.max(0, h - PAD * 2);
-      const perim = 2 * (bw + bh);
-      let t = Math.random() * perim;
-      let x: number;
-      let y: number;
-      if (t < bw) {
-        x = PAD + t;
-        y = PAD;
-      } else if ((t -= bw) < bh) {
-        x = PAD + bw;
-        y = PAD + t;
-      } else if ((t -= bh) < bw) {
-        x = PAD + bw - t;
-        y = PAD + bh;
-      } else {
-        x = PAD;
-        y = PAD + bh - (t - bw);
-      }
-      const outX = x < w / 2 ? -1 : 1;
-      const outY = y < h / 2 ? -1 : 1;
+      // Emit from anywhere behind the button surface, slightly inset.
+      const x = M + 6 + Math.random() * Math.max(1, bw - 12);
+      const y = M + 4 + Math.random() * Math.max(1, bh - 8);
+      const cx = M + bw / 2;
+      const cy = M + bh / 2;
+      const dirX = (x - cx) / Math.max(1, bw / 2);
+      const dirY = y < cy ? -1 : 1;
       const color = COLORS[Math.floor(Math.random() * COLORS.length)] as string;
-      const maxLife = 700 + Math.random() * 700;
+      const maxLife = 900 + Math.random() * 900;
       particles.push({
         x,
         y,
-        vx: outX * (0.04 + Math.random() * 0.09) * (Math.random() < 0.4 ? 0.3 : 1),
-        vy: outY * (0.05 + Math.random() * 0.1),
+        vx: (dirX * 0.05 + (Math.random() - 0.5) * 0.06) * (0.6 + Math.random()),
+        vy: dirY * (0.03 + Math.random() * 0.07) - 0.015,
         life: 0,
         maxLife,
-        size: 0.7 + Math.random() * 1.5,
+        size: 0.6 + Math.random() * 1.6,
         color,
-        star: Math.random() < 0.18,
+        star: Math.random() < 0.15,
+        drift: (Math.random() - 0.5) * 0.00012,
+        phase: Math.random() * Math.PI * 2,
       });
     };
 
@@ -139,20 +131,35 @@ export function DiscordCta({
       ctx.fill();
     };
 
+    // Pre-fill so the emitter looks continuous from the first frame.
+    for (let i = 0; i < 26; i++) {
+      spawn();
+      const p = particles[particles.length - 1];
+      if (p) {
+        const t = Math.random() * p.maxLife * 0.8;
+        p.life = t;
+        p.x += p.vx * t;
+        p.y += p.vy * t;
+      }
+    }
+
     const tick = (now: number) => {
       const dt = Math.min(now - last, 48);
       last = now;
 
-      // Idle animation runs without hover; hover only slightly increases the rate.
-      const rate = hoverRef.current ? 0.012 : 0.006;
+      // Continuous emitter: always on; hover only slightly boosts it.
+      const hovered = hoverRef.current;
+      const rate = hovered ? 0.055 : 0.038;
+      const cap = hovered ? 110 : 85;
       acc += dt * rate;
       while (acc >= 1) {
         acc -= 1;
-        if (particles.length < 40 && Math.random() < 0.8) spawn();
+        if (particles.length < cap) spawn();
       }
 
       ctx.clearRect(0, 0, w, h);
       ctx.globalCompositeOperation = "lighter";
+      const boost = hovered ? 1.2 : 1;
 
       for (let i = particles.length - 1; i >= 0; i--) {
         const p = particles[i];
@@ -162,10 +169,11 @@ export function DiscordCta({
           particles.splice(i, 1);
           continue;
         }
-        p.x += p.vx * dt;
+        p.vx += p.drift * dt;
+        p.x += p.vx * dt + Math.sin(p.phase + p.life * 0.004) * 0.05;
         p.y += p.vy * dt;
         const k = p.life / p.maxLife;
-        const alpha = Math.sin(Math.PI * k) * 0.75;
+        const alpha = Math.sin(Math.PI * k) * 0.7 * boost;
         if (p.star) {
           drawStar(p, alpha);
         } else {
@@ -189,6 +197,7 @@ export function DiscordCta({
       ro.disconnect();
     };
   }, [reduced]);
+
 
   return (
     <span
