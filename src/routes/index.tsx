@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Globe, X } from "lucide-react";
 
 import heroBackground from "@/assets/hero-background.jpg";
+import { DiscordCta, DiscordGlyph } from "@/components/DiscordCta";
 import logoAsset from "@/assets/aniimo-polska-logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
@@ -29,13 +30,6 @@ export const Route = createFileRoute("/")({
 const DISCORD_URL = "https://discord.gg/CzgRVdhWJR";
 const OFFICIAL_URL = "https://www.aniimo.com/";
 
-function DiscordIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
-      <path d="M20.317 4.369A19.79 19.79 0 0 0 15.885 3a13.9 13.9 0 0 0-.617 1.27 18.27 18.27 0 0 0-5.535 0A13.6 13.6 0 0 0 9.11 3 19.74 19.74 0 0 0 4.677 4.37C1.87 8.55 1.11 12.623 1.49 16.638a19.9 19.9 0 0 0 6.073 3.07c.49-.669.926-1.38 1.301-2.126a12.9 12.9 0 0 1-2.05-.984c.172-.126.34-.257.502-.392a14.2 14.2 0 0 0 12.087 0c.164.14.332.27.502.392-.653.386-1.34.716-2.053.986.375.744.81 1.455 1.3 2.124a19.85 19.85 0 0 0 6.076-3.07c.446-4.654-.762-8.69-3.191-12.269ZM8.35 14.19c-1.196 0-2.18-1.096-2.18-2.442 0-1.346.96-2.443 2.18-2.443 1.22 0 2.203 1.107 2.18 2.443 0 1.346-.96 2.442-2.18 2.442Zm7.3 0c-1.196 0-2.18-1.096-2.18-2.442 0-1.346.96-2.443 2.18-2.443 1.22 0 2.203 1.107 2.18 2.443 0 1.346-.96 2.442-2.18 2.442Z" />
-    </svg>
-  );
-}
 
 const navLinks = [
   { label: "Strona główna", href: "/", active: true },
@@ -154,15 +148,13 @@ function Index() {
         </p>
 
         <div className="mt-8 flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row">
-          <a
+          <DiscordCta
             href={DISCORD_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="flex w-full items-center justify-center gap-2.5 rounded-full bg-gradient-cta px-8 py-3.5 text-sm font-bold tracking-wide text-white shadow-glow-cyan transition-all duration-300 hover:-translate-y-0.5 hover:shadow-glow-cyan-strong sm:w-auto md:text-base"
+            className="flex w-full items-center justify-center gap-2.5 rounded-full bg-gradient-cta px-8 py-3.5 text-sm font-bold tracking-wide text-white shadow-glow-cyan sm:w-auto md:text-base"
           >
-            <DiscordIcon className="h-5 w-5" />
+            <DiscordGlyph className="h-5 w-5 shrink-0" />
             DOŁĄCZ NA DISCORDA
-          </a>
+          </DiscordCta>
           <a
             href={OFFICIAL_URL}
             target="_blank"
