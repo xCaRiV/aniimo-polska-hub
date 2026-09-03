@@ -147,15 +147,13 @@ function Index() {
         </p>
 
         <div className="mt-8 flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row">
-          <a
+          <DiscordCta
             href={DISCORD_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="flex w-full items-center justify-center gap-2.5 rounded-full bg-gradient-cta px-8 py-3.5 text-sm font-bold tracking-wide text-white shadow-glow-cyan transition-all duration-300 hover:-translate-y-0.5 hover:shadow-glow-cyan-strong sm:w-auto md:text-base"
+            className="flex w-full items-center justify-center gap-2.5 rounded-full bg-gradient-cta px-8 py-3.5 text-sm font-bold tracking-wide text-white shadow-glow-cyan sm:w-auto md:text-base"
           >
-            <DiscordIcon className="h-5 w-5" />
+            <DiscordGlyph className="h-5 w-5 shrink-0" />
             DOŁĄCZ NA DISCORDA
-          </a>
+          </DiscordCta>
           <a
             href={OFFICIAL_URL}
             target="_blank"
