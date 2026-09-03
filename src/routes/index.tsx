@@ -4,7 +4,8 @@ import { Globe, X } from "lucide-react";
 
 import heroBackground from "@/assets/hero-background.jpg";
 import { DiscordCta, DiscordGlyph } from "@/components/DiscordCta";
-import logoAsset from "@/assets/aniimo-polska-logo.png.asset.json";
+// Logo is served from public/ so the static export works on any plain hosting.
+const LOGO_SRC = "/aniimo-polska-logo.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -81,7 +82,7 @@ function Index() {
         {/* LOGO — swap this block for an <img> logo later */}
         <a href="/" className="flex items-center leading-none">
           <img
-            src={logoAsset.url}
+            src={LOGO_SRC}
             alt="Aniimo Polska"
             className="h-9 w-auto md:h-11"
           />
@@ -133,7 +134,7 @@ function Index() {
 
         <h1 className="w-full">
           <img
-            src={logoAsset.url}
+            src={LOGO_SRC}
             alt="Aniimo Polska"
             className="mx-auto h-auto w-[min(88vw,520px)] drop-shadow-[0_6px_26px_rgba(70,150,205,0.55)]"
           />
