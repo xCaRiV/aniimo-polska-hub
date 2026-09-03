@@ -143,12 +143,12 @@ export function DiscordCta({
       const dt = Math.min(now - last, 48);
       last = now;
 
-      // Low, irregular spawn rate — with natural quiet moments.
-      const rate = hoverRef.current ? 0.011 : 0.0035;
+      // Idle animation runs without hover; hover only slightly increases the rate.
+      const rate = hoverRef.current ? 0.012 : 0.006;
       acc += dt * rate;
       while (acc >= 1) {
         acc -= 1;
-        if (particles.length < 40 && Math.random() < 0.75) spawn();
+        if (particles.length < 40 && Math.random() < 0.8) spawn();
       }
 
       ctx.clearRect(0, 0, w, h);
