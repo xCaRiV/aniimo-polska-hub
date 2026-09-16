@@ -10,20 +10,31 @@ const LOGO_SRC = "/aniimo-polska-logo.png";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Aniimo Polska — Polska społeczność Aniimo" },
+      { title: "Aniimo Polska – Polska społeczność graczy Aniimo" },
       {
         name: "description",
         content:
-          "Dołącz do Aniimo Polska — polskiej społeczności graczy Aniimo. Poznaj innych Pathfinderów i wspólnie odkrywaj świat Idyll.",
+          "Aniimo Polska to polska społeczność graczy Aniimo. Aktualności, kody, wydarzenia, pomoc i Discord dla polskich graczy.",
       },
+      { name: "robots", content: "index, follow" },
       { name: "theme-color", content: "#7fd7f5" },
-      { property: "og:title", content: "Aniimo Polska" },
-      { property: "og:description", content: "Polska społeczność graczy Aniimo." },
+      { property: "og:title", content: "Aniimo Polska – Polska społeczność graczy Aniimo" },
+      {
+        property: "og:description",
+        content: "Dołącz do polskiej społeczności Aniimo. Aktualności, kody, wydarzenia, pomoc i wspólna gra.",
+      },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://aniimo.pl/" },
+      { property: "og:locale", content: "pl_PL" },
+      { property: "og:site_name", content: "Aniimo Polska" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Aniimo Polska" },
-      { name: "twitter:description", content: "Polska społeczność graczy Aniimo." },
+      { name: "twitter:title", content: "Aniimo Polska – Polska społeczność graczy Aniimo" },
+      {
+        name: "twitter:description",
+        content: "Dołącz do polskiej społeczności Aniimo. Aktualności, kody, wydarzenia, pomoc i wspólna gra.",
+      },
     ],
+    links: [{ rel: "canonical", href: "https://aniimo.pl/" }],
   }),
   component: Index,
 });
